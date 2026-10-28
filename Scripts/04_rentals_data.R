@@ -11,7 +11,8 @@ source(here("Functions", "fx_plot.R"))
 rental_tbl <- read_excel(here("Data", "Rental metadata", "Rental_Unit_data_Monthly_History.xlsx"))
 
 # EDA ---------------------------------------------------------------
-
+rental_tbl |> 
+  DataExplorer::create_report()
 
 # Graphing ---------------------------------------------------------------
 

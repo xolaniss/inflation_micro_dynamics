@@ -2,8 +2,7 @@
 # domestic worker wages (UIF) - XS Nov 2026
 
 # TODO -----------------------------
-
-# what is DDW?
+# Some sort of missing identifier or a way to plot the data
 
 # Preliminaries -----------------------------------------------------------
 library(here)
@@ -25,7 +24,7 @@ dww_tbl <- read_excel(here("Data", "DDW metadata", "DWW_Unit_data_Monthly_Histor
   
 # EDA ---------------------------------------------------------------
 dww_tbl |> 
-  skim()
+  DataExplorer::create_report()
 
 # Graphing ---------------------------------------------------------------
 
