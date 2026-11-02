@@ -28,6 +28,7 @@ suppressWarnings(suppressMessages(suppressPackageStartupMessages({
   conflict_prefer("lag", "dplyr")
   conflict_prefer("first", "dplyr")
   conflict_prefer("last", "dplyr")
+  conflict_prefer("between", "dplyr")
   
   # graphs
   library(PNWColors)
