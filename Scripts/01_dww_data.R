@@ -26,8 +26,8 @@ dww_clean_tbl <-
          date = as.Date(date)
   ) |> 
   dplyr::mutate(
-    p_low  = quantile(dww, 0.05, na.rm = TRUE),
-    p_high = quantile(dww, 0.95, na.rm = TRUE),
+    p_low  = quantile(dww, 0.01, na.rm = TRUE),
+    p_high = quantile(dww, 0.99, na.rm = TRUE),
     dww    = dplyr::case_when(
       dww < p_low  ~ p_low,
       dww > p_high ~ p_high,
@@ -53,14 +53,13 @@ dww_aggregate_gg <-
 
 dww_aggregate_gg
 
-# Distritbution -----------------------------------------------------------
+# Distribution -----------------------------------------------------------
 dww_distribution_gg <- 
   dww_clean_tbl |> 
-  ggplot(aes(x = dww, y = after_stat(count / sum(count)))) + 
-  geom_histogram(bins = 30, fill = "steelblue", color = "white") +
-  # Formats the scale numbers neatly as 10%, 20%, etc.
-  scale_y_continuous(labels = scales::percent_format()) +
-  labs(x = "Distribution of domestic worker wage (R)", y = "Percentage of Total") +
+  ggplot(aes(x = dww)) +
+  geom_density(fill = "steelblue") +
+  scale_x_log10(labels = scales::label_number(scale_cut = scales::cut_short_scale())) +
+  labs(x = "Distribution of domestic worker wage (R)", y = "Density") +
   facet_wrap( ~ lubridate::year(date), scales = "free") +
   theme_minimal()
 
